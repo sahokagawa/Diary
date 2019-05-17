@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// get(引数１URLリクエスト　引数２対象コントローラー＠対象メソッド)
+// URLリクエスト　が来た時に　対象コントローラー＠対象メソッドを！
+Route::get('/', 'DiaryController@index')->name('diary.index'); //追加
+
+Route::get('diary/create', 'DiaryController@create')->name('diary.create'); //追加
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
