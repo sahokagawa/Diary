@@ -18,14 +18,21 @@ Diary 一覧
 	<link rel="stylesheet" type="text/css" href="/css/app.css">
 
 </head> -->
-<body>
-	<div class="m-4 p-4 border border-primary">
-		<p>ほげ</p>
-		<p>ほげほげほげ</p>
-		<p>2019/xx/yy</p>
-	</div>
+{{-- <body>
+ --}}
 
-@endsection
+<a href="{{route('diary.create')}}" class="btn btn-primary">新規投稿</a>
+
+			@foreach ($diaries as $diary)
+			<div class="m-4 p-4 border border-primary">
+				<p>{{ $diary["title"] }}</p>
+				<p>{{ $diary["body"] }}</p>
+				<p>{{ $diary["created_at"] }}</p>
+			</div>
+			@endforeach
+
+
+	@endsection
 
 {{-- </html> --}}
 
