@@ -21,7 +21,22 @@ Route::get('diary/create','DiaryController@create')->name('diary.create'); //投
 
 Route::post('diary/create','DiaryController@store')->name('diary.create'); //保存処理　Ppost送信　store メソッド呼び出して保存する
 
+
+Route::delete('diary/{id}/delete', 'DiaryController@destroy')->name('diary.destroy');// 削除機能
+
+
+
 // restful って検索したら、なんで同じ名前でgetとpostの違いがあるかとかわかるかも！
+
+// RESETFul設計
+// get 取得　　　　（データ取ってきて表示）
+// POST 作成　　　　（登録）
+// patch 更新
+// delete 削除
+
+
+
+
 
 // Route::get('/', function () {
 //     return view('welcome');

@@ -28,6 +28,14 @@ Diary 一覧
 				<p>{{ $diary["title"] }}</p>
 				<p>{{ $diary["body"] }}</p>
 				<p>{{ $diary["created_at"] }}</p>
+
+				{{--削除ボタンを設ける--}}
+				<form action="{{route('diary.destroy',['id' => $diary['id']])}}" method="POST" class="d-inline">
+
+					@csrf
+					@method('delete')
+					<button class="btn btn-danger">削除</button>
+				</form>
 			</div>
 			@endforeach
 

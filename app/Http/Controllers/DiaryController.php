@@ -1,10 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+//namespace 各クラスのショートカットつくるようなイメージ
+// ショートカットの名前使ってuseで呼び出す感じ
+// 注意するのは、最初大文字と、バックスラッシュ
 
-use Illuminate\Http\Request;
+
+
 // require_onceのイケてる版
+use Illuminate\Http\Request;
+//長すぎて書きたくもない笑
 use App\Diary;
+// require_once('../../Diary.php');
+use App\Http\Requests\CreateDiary;
+// require_once('../Requests/CreateDiary.php');
+
 
 // クラスの継承
 // class　子クラス　extends 親クラス
@@ -47,7 +57,8 @@ class DiaryController extends Controller
     }
 
     // createページにあるstoreメソッドの定義
-		public function store(Request $request){
+		public function store(CreateDiary $request){
+			// Request クラスを使って$request   9行目で使えるようにする
 			// 保存画面
 			// dd('ほげ');
 
@@ -67,6 +78,13 @@ class DiaryController extends Controller
 // createで見ようとすると、URLが変わってしまう
 			return redirect()->route('diary.index');
 // header()と同じような処理
+		}
+
+		public function destroy($id){
+			dd($id);
+			// http://localhost:8000/diary/1/delete  数字のところ注目
+			// 削除したところのIdになる
+			// 引数($id)って入れることで画面上も数字になる
 		}
 
 
