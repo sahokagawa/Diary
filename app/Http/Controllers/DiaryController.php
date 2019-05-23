@@ -81,10 +81,21 @@ class DiaryController extends Controller
 		}
 
 		public function destroy($id){
-			dd($id);
+			// dd($id);  //ddで画面に出す　確認
 			// http://localhost:8000/diary/1/delete  数字のところ注目
 			// 削除したところのIdになる
-			// 引数($id)って入れることで画面上も数字になる
+			// 引数($id)って入れることで画面上も数字になる　web.phpの引数
+			// web.phpの引数が渡されて　 destroy関数で表示される
+
+			// 削除処理
+			// DELETE FROM ターブル名　WHERE id=?
+			// ララベルではどう書くか
+			$diary = Diary::find($id);
+			// SELECT FROM diaries WHERE id=? が行われる
+			$diary->delete();
+			//  DELETE FROM diaries　WHERE id=?
+			return redirect()->route('diary.index');
+
 		}
 
 
@@ -93,7 +104,7 @@ class DiaryController extends Controller
 // view('diaries.index',["diaries" => $diaries]
 // view('③',["②" => ①]①の変数を、②の変数に変えて③のviewへ送る。
 
-// 端折らずに返したら、変数定義してarray関数で....とか書かないけんけど　上の書き方をララベルのルールとして覚える
+// はしょらんで書いたら、変数定義してarray関数で....とか書かないけんけど　上の書き方をララベルのルールとして覚える
 
 
 

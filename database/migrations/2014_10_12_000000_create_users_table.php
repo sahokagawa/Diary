@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        // users テーブル作る
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -21,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            // テーブル追加するときここに追加したらいけん
+            // 一回読み込んだらもういじっちゃいけん
+            //変更したかったら、migrationふぁいるを作る
         });
     }
 

@@ -23,6 +23,7 @@ Route::post('diary/create','DiaryController@store')->name('diary.create'); //保
 
 
 Route::delete('diary/{id}/delete', 'DiaryController@destroy')->name('diary.destroy');// 削除機能
+//{}の中は、対応するメソッドの因数による
 
 
 

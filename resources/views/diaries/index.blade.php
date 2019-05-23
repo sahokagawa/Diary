@@ -1,5 +1,5 @@
-<!-- bladeファイル
-viewのテンプレートエンジンと呼ばれるもので、phpとhtmlをもっと効率よく書く事ができる仕組み -->
+{{-- bladeファイル
+viewのテンプレートエンジンと呼ばれるもので、phpとhtmlをもっと効率よく書く事ができる仕組み  --}}
 <!-- laravel ではviewは必ずbladeで作る必要がある    .blade抜くと画面でない -->
 
 @extends('layout')
@@ -34,7 +34,9 @@ Diary 一覧
 
 					@csrf
 					@method('delete')
-					<button class="btn btn-danger">削除</button>
+					<button class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i>削除</button>
+{{-- outlineって入れると、白抜き、カーソル合わせたら色変わるようになる --}}
+
 				</form>
 			</div>
 			@endforeach
@@ -45,4 +47,4 @@ Diary 一覧
 {{-- </html> --}}
 
 
-<!-- レイアウトphpあるから、ボディー以外残部消す -->
+<!-- レイアウトphpあるから、ボディー以外残部消す
