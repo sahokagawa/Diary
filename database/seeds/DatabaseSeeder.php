@@ -11,6 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        // php artisan db:seed     class=UsersTableSeede
+         $this->call(DiariesTableSeeder::class);
+        // php artisan db:seed     class=DiariesTableSeede
+
+          // seedが複複数だと登録する順番も大切
+          // コマンドを登録して、間違えないようにする
     }
 }

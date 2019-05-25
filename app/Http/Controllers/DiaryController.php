@@ -15,6 +15,9 @@ use App\Diary;
 use App\Http\Requests\CreateDiary;
 // require_once('../Requests/CreateDiary.php');
 
+use Illuminate\Support\Facades\Auth;
+//Auth;クラスを使えるようにする
+
 
 // クラスの継承
 // class　子クラス　extends 親クラス
@@ -71,6 +74,10 @@ class DiaryController extends Controller
 			$diary = new Diary();  //インスタンス化　オブジェクトにする
 			$diary->title = $request->title;
 			$diary->body = $request->body;
+
+			$diary->user_id = Auth::user()->id;
+			// dd(Auth::user()->id);
+
 			$diary->save();
 
 // 登録し終わったら一覧ページに戻る、リダイレクト処理

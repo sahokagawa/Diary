@@ -25,6 +25,13 @@ class CreateUsersTable extends Migration
             // テーブル追加するときここに追加したらいけん
             // 一回読み込んだらもういじっちゃいけん
             //変更したかったら、migrationふぁいるを作る
+
+            // コマンドで、php artisan migrate:rollbackで一つ前に戻る
+            // rollback（処理を取り消す）した時に読みこまれるのは、down メソッド
+            // 作った時に読み込まれるのはupメソッド
+
+            // もうよくわからん！ってなった時は　php artisan migrate :refresh
+            // それでもダメなら php artisan migrate:fresh
         });
     }
 
