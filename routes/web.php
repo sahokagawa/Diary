@@ -24,6 +24,10 @@ Route::group(['middleware' => 'auth'],function(){
 
 	Route::post('diary/create','DiaryController@store')->name('diary.create'); //保存処理　Ppost送信　store メソッド呼び出して保存する
 
+	Route::get('diary/{id}/edit', 'DiaryController@edit')->name('diary.edit'); // 編集画面
+
+	Route::put('diary/{id}/update', 'DiaryController@update')->name('diary.update'); //更新処理
+
 
 	Route::delete('diary/{id}/delete', 'DiaryController@destroy')->name('diary.destroy');// 削除機能
 //{}の中は、対応するメソッドの因数による
@@ -39,7 +43,7 @@ Route::group(['middleware' => 'auth'],function(){
 // RESETFul設計
 // get 取得　　　　（データ取ってきて表示）
 // POST 作成　　　　（登録）
-// patch 更新
+// put 更新
 // delete 削除
 
 

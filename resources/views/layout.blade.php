@@ -70,6 +70,21 @@
         </div>
       </nav> --}}
 
+
+{{-- ちょっと遊んでみようヽ(*＾ω＾*)ﾉ --}}
+@guest 
+{{-- ログインしていないゲスト状態の場合の処理 --}}
+ゲスト
+@else
+{{-- ログインしている場合の処理 --}}
+ログイン
+{{ Auth::user()->name }}
+@endguest
+
+{{-- Aouth を使って大丈夫なのはログイン後！　やないとエラー出ることある。そんなユーザーいませんって！ --}}
+
+
+
       <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">

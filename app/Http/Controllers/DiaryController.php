@@ -77,6 +77,7 @@ class DiaryController extends Controller
 
 			$diary->user_id = Auth::user()->id;
 			// dd(Auth::user()->id);
+			// Auth::user() で今ログインしてるユーザーのいろんな情報取れる
 
 			$diary->save();
 
@@ -105,6 +106,31 @@ class DiaryController extends Controller
 
 		}
 
+		public function edit($id){
+			$diary= Diary::find($id);
+			// SELECT * FROM diaries WHERE id=?
+			// $diaryはcontrollerという型でできていて、Array にするにはtoArray()
+			// 普通はやり方揃えた方がいいいけど、今回は勉強のため別パターンもやってみよう
+
+			return view('diaries.edit',['diary' => $diary]);
+		}
+
+			function update($id,CreateDiary $request){
+				//$requestがバリデーション機能付きの＄＿POSTみたいなもの
+
+				// $diary= Diary::find($id);   //一件データ取得
+
+				//  $diary= Diary::find($id);  // 値上書き
+				// $diary->save();             //保存
+
+				$diary= Diary::find($id);  //
+
+				$diary->title = $request->title; //画面で入力されたタイトルを代入
+		    $diary->body = $request->body; //画面で入力された本文を代入
+		    $diary->save(); //DBに保存
+
+		    return redirect()->route('diary.index'); //一覧ページにリダイレクト
+		}
 
 }
 
