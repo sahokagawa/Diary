@@ -34,9 +34,14 @@ Route::group(['middleware' => 'auth'],function(){
 
 	Route::get('/mypage', 'DiaryController@mypage')->name('diary.mypage');
 
+// アカウント削除試みた
 	// Route::resource('/deleteusers', 'UseController')->name('diary.deleteusers');
 
-	Route::get('/user', 'DiaryController@alluser')->name('diary.user');
+// ユーザ一ー覧試みた
+	// Route::get('/user', 'DiaryController@alluser')->name('diary.user');
+
+	Route::post('diary/{id}/like', 'DiaryController@like')->name("diary.like");
+  Route::post('diary/{id}/dislike', 'DiaryController@dislike')->name("diary.dislike");
 });
 
 

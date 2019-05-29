@@ -46,9 +46,21 @@ Diary 一覧
 				</form>
 			@endif
 
-			</div>
+			{{-- いいね機能 --}}
+			<div class="mt-3 ml-3">
+				<form method="POST" action="{{ route('diary.like',['id' => $diary['id']]) }}">
+					@csrf
+				<button type="submit" class="btn btn-outline-primary"><i class="fas fa-thumbs-up"></i>
+					{{-- <span>100</span> --}}
+					<span>{{$diary->likes->count()}}</span>
+				</button>
 
-	
+				</form>
+
+			</div>
+		</div>
+
+
 
 			@endforeach
 

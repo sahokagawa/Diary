@@ -36,14 +36,19 @@ class DiaryController extends Controller
 
 
 				// モデルファイルを使ってデータを取得する　７行目
-	$diaries = Diary::all()->toArray(); 
-	//  Diaryクラス
-	//急遽toArray()メソッドで配列にして見やすく！！
-				// SELECT*FROM diaries WHERE  1を実行し$diariesを入れる(小文字複数形にしたテーブルができる)
-				// allメソッドだけやと、見にくいかたら(Collectionで表示される)、toArray()メソッドで配列（Array)にチェインする
-	// dd($diaries);     //確認
+	// $diaries = Diary::all()->toArray();
+	// いいね機能のために51行目でいじる
 
-	// $diaries = Diary::find(1)->toArray();  こんなのもある！色々ある！
+				//  Diaryクラス
+				//急遽toArray()メソッドで配列にして見やすく！！
+							// SELECT*FROM diaries WHERE  1を実行し$diariesを入れる(小文字複数形にしたテーブルができる)
+							// allメソッドだけやと、見にくいかたら(Collectionで表示される)、toArray()メソッドで配列（Array)にチェインする
+				// dd($diaries);     //確認
+
+				// $diaries = Diary::find(1)->toArray();  こんなのもある！色々ある！
+
+// いいね機能のためにいじる   39行目変更
+	$diaries = Diary::with('likes')->orderBy('id','desc')->get();
 
 
 
@@ -54,6 +59,8 @@ class DiaryController extends Controller
 // view関数はresources/view/内にあるファイルを取得する関数
 // view('ファイル名')もしくは view('フォルダ名.ファイル名')  .bladeの前のみでおっけい
     }
+
+
     public function create(){
     	// 投稿画面
     	return view('diaries.create');
@@ -164,6 +171,21 @@ class DiaryController extends Controller
 
 				return view('diaries.mypage', ['diaries' => $diaries]);
 			}
+
+
+			function like($id){
+				// idをもとにdiaryデータを一件取得
+				$diary= Diary::where('id',$id)->with('likes')->first();
+				// dd($diary);
+				// withつけろと、ddした時に......紐ずくデータも持ってきてくれる　　今回なくてもプログラムに問題ない　　よくわからんけど笑
+
+				//likesテーブルに選択されているdiaryとログインしているユーザーのidをINSERTする
+				$diary->likes()->attach(Auth::user()->id);
+				// attachっていうメソッド
+				// i INSERT INTO likes (diary_id, user_id) VALUES ($diary->id, Auth::user()->id)			}
+
+				return redirect()->route('diary.index');
+		}
 
 // ユーザー一覧表示　試みた
 			// public function alluser(){
