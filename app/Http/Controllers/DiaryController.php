@@ -104,6 +104,10 @@ class DiaryController extends Controller
 			//  DELETE FROM diaries　WHERE id=?
 			return redirect()->route('diary.index');
 
+			// $user = User::find($id);
+   //  $user->delete();
+   //  return redirect('/');
+
 		}
 
 		public function edit($id){
@@ -131,6 +135,50 @@ class DiaryController extends Controller
 
 		    return redirect()->route('diary.index'); //一覧ページにリダイレクト
 		}
+
+
+
+// マイページに飛ぶ
+// 今回回欲しいのはログインしているユーザーが投稿した日記データが欲しい
+//たとえばログインユーザー１だったら
+// SELECT*FROM diaries WHERE user_id=1
+			public function mypage(){
+
+
+				// パターン１
+				// $login_user = Auth::user();
+				// // dd($login_user->id);
+
+				// // 欲しいのは日記データのidではなくて、その人のユーザーID
+				// // where('カラム名',値);
+				// $diaries = Diary::where("user_id",1)->get();
+				// dd($diaries);
+
+
+				// パターン２　modelのリレーションを使うパターン
+				$login_user = Auth::user();
+				$diaries = $login_user->diaries;
+				// dd($diaries);
+				// $login_user->diaries()かっこつけると、hasmanyメソッドが取れちゃう
+				// （）なしでプロパティ　データが取れる
+
+				return view('diaries.mypage', ['diaries' => $diaries]);
+			}
+
+// ユーザー一覧表示　試みた
+			// public function alluser(){
+			// 	 $user = Users::all($request->input('id'));
+			// 	return view('diaries.user', ['users' => $users]);
+			// }
+
+
+//アカウント削除　試みた
+		// 		public function destroy($id)
+		// 		{
+		// 		   $user = User::find($id);
+		// 			 $user->delete();
+		// 		   return redirect('/');
+		// }
 
 }
 

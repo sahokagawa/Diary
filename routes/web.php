@@ -31,6 +31,12 @@ Route::group(['middleware' => 'auth'],function(){
 
 	Route::delete('diary/{id}/delete', 'DiaryController@destroy')->name('diary.destroy');// 削除機能
 //{}の中は、対応するメソッドの因数による
+
+	Route::get('/mypage', 'DiaryController@mypage')->name('diary.mypage');
+
+	// Route::resource('/deleteusers', 'UseController')->name('diary.deleteusers');
+
+	Route::get('/user', 'DiaryController@alluser')->name('diary.user');
 });
 
 
