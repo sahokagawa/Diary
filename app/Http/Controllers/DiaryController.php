@@ -177,7 +177,9 @@ class DiaryController extends Controller
 				// idをもとにdiaryデータを一件取得
 				$diary= Diary::where('id',$id)->with('likes')->first();
 				// dd($diary);
-				// withつけろと、ddした時に......紐ずくデータも持ってきてくれる　　今回なくてもプログラムに問題ない　　よくわからんけど笑
+				// withつけると、ddした時にdiaryテーブルに紐ずくlikesテーブルも持ってきてくれる　　今回なくてもプログラムに問題ない　　よくわからんけど笑
+				// SQL文で書くとJOINっていうのを使わないといけない
+				// SELECT FROM diaries JOIN likes..............
 
 				//likesテーブルに選択されているdiaryとログインしているユーザーのidをINSERTする
 				$diary->likes()->attach(Auth::user()->id);
@@ -187,14 +189,22 @@ class DiaryController extends Controller
 				return redirect()->route('diary.index');
 		}
 
-// ユーザー一覧表示　試みた
+		function dislike($id){
+			// dd($id);
+				$diary= Diary::where('id',$id)->with('likes')->first();
+				$diary->likes()->detach(Auth::user()->id);
+				// DELETE FROM likes WHERE diary_id=$diary->id AND user_id=Auth::user()->id
+				return redirect()->route('diary.index');
+		}
+
+// ユーザー一覧表示試みた
 			// public function alluser(){
 			// 	 $user = Users::all($request->input('id'));
 			// 	return view('diaries.user', ['users' => $users]);
 			// }
 
 
-//アカウント削除　試みた
+//アカウント削除試みた
 		// 		public function destroy($id)
 		// 		{
 		// 		   $user = User::find($id);
@@ -207,7 +217,7 @@ class DiaryController extends Controller
 // view('diaries.index',["diaries" => $diaries]
 // view('③',["②" => ①]①の変数を、②の変数に変えて③のviewへ送る。
 
-// はしょらんで書いたら、変数定義してarray関数で....とか書かないけんけど　上の書き方をララベルのルールとして覚える
+// はしょらんで書いたら、変数定義してarray関数で....とか書かないけんけど上の書き方をララベルのルールとして覚える
 
 
 

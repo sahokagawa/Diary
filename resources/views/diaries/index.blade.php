@@ -47,18 +47,43 @@ Diary 一覧
 			@endif
 
 			{{-- いいね機能 --}}
-			<div class="mt-3 ml-3">
-				<form method="POST" action="{{ route('diary.like',['id' => $diary['id']]) }}">
+
+			{{-- <div class="mt-3 ml-3"> --}}
+				{{-- ボタンを全部横並びにしたいからdiv消してstyle="display:inline"追加 --}}
+
+
+{{-- いいねされてたらいいねを取り消すボタンを --}}
+	@if(Auth::check()&&$diary->likes->contains(function($user){
+			return $user->id == Auth::user()->id;
+		}))
+		{{-- Auth::check()でまずログインしてるかどうか --}}
+		{{-- contains(function($user){
+			return $user->id == Auth::user()->id;ですでにいいねしたところにはいいねボタンなくなる --}}
+			{{-- $diary->likesで取れるのはこの日記に何人いいねしているか --}}
+
+
+{{-- いいねされてなければいいねボタンを設置 --}}
+					<form style="display:inline" method="POST" action="{{ route('diary.dislike',['id' => $diary['id']]) }}">
+						@csrf
+					<button type="submit" class="btn btn-outline-danger"><i class="fas fa-thumbs-up"></i>
+						{{-- <span>100</span> --}}
+						<span>{{$diary->likes->count()}}</span>
+					</button>
+					</form>
+
+		@else
+
+				<form style="display:inline" method="POST" action="{{ route('diary.like',['id' => $diary['id']]) }}">
 					@csrf
 				<button type="submit" class="btn btn-outline-primary"><i class="fas fa-thumbs-up"></i>
 					{{-- <span>100</span> --}}
 					<span>{{$diary->likes->count()}}</span>
 				</button>
-
 				</form>
+			{{-- </div> --}}
 
-			</div>
-		</div>
+		@endif
+	</div>
 
 
 
