@@ -86,6 +86,10 @@ class DiaryController extends Controller
 			// dd(Auth::user()->id);
 			// Auth::user() で今ログインしてるユーザーのいろんな情報取れる
 
+
+　　　　// ランダムな文字列で画像名を設定
+			$diary->img_url=$request->img_url->store('public/diary_img');
+
 			$diary->save();
 
 // 登録し終わったら一覧ページに戻る、リダイレクト処理

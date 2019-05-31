@@ -21,12 +21,45 @@ Diary 一覧
 {{-- <body>
  --}}
 
+
+
+
+{{-- 画像を出す --}}
+{{-- フレームワークしてるからパスがめっちゃ長い --}}
+{{-- publicフォルダが最初に読まれるから/から初めていい！ --}}
+<img src="/img/ahiru.jpg">
+{{-- もしくはasset関数使う --}}
+<img src="{{asset('img/ahiru.jpg')}}">
+{{-- DBに画像は登録できないからimgフォルダに蓄えて、DBには名前を蓄える --}}
+
+{{-- コマンドphp artisan make:migration add_img_url_to_diaries_table --}}
+{{-- upとdownをかく --}}
+{{-- コマンド　php artisan migrate --}}
+
+{{-- viewの作成 --}}
+{{-- 画像の送信は必ずenctype=”multipart/form-data”属性 --}}
+{{-- divタグの追加 --}}
+
+{{-- storeメソッド --}}
+{{-- storeAsメソッド　画像をアップロードするメソッド --}}
+{{-- storeAs('public/diary_img','ahiru.jpg');場所と名前決めてる　　　あなじ名前ができる --}}
+{{-- store('public/diary_img')に変更して保存する場所だけき決める --}}
+{{-- 新規投稿すると　strage app public diary_imgの中に羽織っていく　ランダムな名前で！ --}}
+{{-- コマンドphp artisan storage:link シンボリックつくる　パブリックの中をストレージの中に.....--}}
+{{-- 投稿に表示されるようにこのファイルいじる --}}
+
+
+
+
 <a href="{{route('diary.create')}}" class="btn btn-primary">新規投稿</a>
 
 			@foreach ($diaries as $diary)
 			<div class="m-4 p-4 border border-primary">
 				<p>{{ $diary["title"] }}</p>
 				<p>{{ $diary["body"] }}</p>
+				@if($diary->img_url)
+				<img src="{{str_replace('public/','storage/',$diary->img_url)}}">
+				@endif
 				<p>{{ $diary["created_at"] }}</p>
 
 
